@@ -4,68 +4,86 @@ import os
 import shutil
 
 numFiguresProcessed = 0
-def parseLine( line ):
+
+
+def parse_line(line):
     m = re.search('input\{([^\}]*)', line)
     if m:
         return m.group(1)
     else:
         return []
-def parseForFigure( line ):
+
+
+def parse_for_figure(line):
     m = re.search('\{(\S*\/([^\/]*\.pdf))\}', line)
     if m:
         return m.group(1), m.group(2)
     else:
         return [], []
-def remakeFigureLine( line ):
+
+
+def remake_figure_line(line):
     global numFiguresProcessed
     numFiguresProcessed += 1
-    figName = 'f'
+    fig_name = 'f'
     if numFiguresProcessed < 10:
-        figName += '0' + str(numFiguresProcessed)
+        fig_name += '0' + str(numFiguresProcessed)
     else:
-        figName += str(numFiguresProcessed)
-    figName += '.pdf'
-    #return re.sub(r'\{(\S*\/([^\/]*\.pdf))\}', r'{\2}', line)
-    return re.sub(r'\{(\S*\/([^\/]*\.pdf))\}', '{' + figName + '}', line), figName
-def findFileDepends( filename ):
-    infile = open( filename )
-    fileList = []
+        fig_name += str(numFiguresProcessed)
+    fig_name += '.pdf'
+    # return re.sub(r'\{(\S*\/([^\/]*\.pdf))\}', r'{\2}', line)
+    return re.sub(r'\{(\S*\/([^\/]*\.pdf))\}', '{' + fig_name + '}', line), fig_name
+
+
+def find_file_depends(filename):
+    infile = open(filename)
+    file_list = []
     for line in infile:
-        dependingFile = parseLine( line )
-        if( dependingFile != [] ):
-            fileList.append( dependingFile )
-            moreFiles = findFileDepends( dependingFile )
-            if moreFiles != []:
-                fileList.append( moreFiles )
-    return fileList
-def remakeFile( fileName, outFolder ):
-    infile = open( fileName )
-    outfile = open( outFolder + '/' + fileName, 'w+' )
+        depending_file = parse_line(line)
+        if depending_file:
+            file_list.append(depending_file)
+            more_files = find_file_depends(depending_file)
+            if more_files:
+                file_list.append(more_files)
+    return file_list
+
+
+def remake_file(file_name, out_folder):
+    infile = open(file_name)
+    outfile = open(out_folder + '/' + file_name, 'w+')
     for line in infile:
-        figurePath, figName = parseForFigure( line )
-        if figurePath != []:
-            line, figName = remakeFigureLine( line )
-            shutil.copy2(figurePath, 'packaged/' + figName)
+        figure_path, fig_name = parse_for_figure(line)
+        if figure_path:
+            line, fig_name = remake_figure_line(line)
+            shutil.copy2(figure_path, 'packaged/' + fig_name)
         outfile.write(line)
-def addFileToStream( fileName, outStream):
-    infile = open( fileName )
+
+
+def add_file_to_stream(file_name, out_stream):
+    infile = open(file_name)
     for line in infile:
-        dependingFile = parseLine( line )
-        if( dependingFile != [] ):
-            addFileToStream( dependingFile, outStream )
+        depending_file = parse_line(line)
+        if depending_file:
+            add_file_to_stream(depending_file, out_stream)
         else:
-            figurePath, figName = parseForFigure( line )
-            if figurePath != []:
-                line, figName = remakeFigureLine( line )
-                shutil.copy2(figurePath, 'packaged/' + figName)
-            outStream.write( line )
-def convertToOneFile( fileName, outFolder ):
-    outfile = open( outFolder + '/' + fileName, 'w+' )
-    addFileToStream( fileName, outfile )
-def makeFolders( outFolder ):
-    if not os.path.exists( outFolder ):
-        os.makedirs( outFolder )
-        #os.makedirs( outFolder + '/' + 'figures' )
+            figure_path, fig_name = parse_for_figure(line)
+            if figure_path:
+                line, fig_name = remake_figure_line(line)
+                shutil.copy2(figure_path, 'packaged/' + fig_name)
+            out_stream.write(line)
+
+
+def convert_to_one_file(file_name, out_folder):
+    outfile = open(out_folder + '/' + file_name, 'w+')
+    add_file_to_stream(file_name, outfile)
+
+
+def make_folders(out_folder):
+    if not os.path.exists(out_folder):
+        os.makedirs(out_folder)
+        # os.makedirs( outFolder + '/' + 'figures' )
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-o', '--output')
@@ -73,11 +91,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
     inputfilename = args.input
     outputfoldername = args.output
-    #texFiles = findFileDepends( inputfilename )
-    #texFiles.append( inputfilename )
-    makeFolders( outputfoldername )
-    convertToOneFile( inputfilename, outputfoldername )
-    #for fileName in texFiles:
-    #    remakeFile( fileName, outputfoldername )
+    # texFiles = find_file_depends( inputfilename )
+    # texFiles.append( inputfilename )
+    make_folders(outputfoldername)
+    convert_to_one_file(inputfilename, outputfoldername)
+    # for fileName in texFiles:
+    #    remake_file( fileName, outputfoldername )
     # todo function for references
-    shutil.copy2( 'references.bib', outputfoldername + '/')
+    shutil.copy2('references.bib', outputfoldername + '/')
