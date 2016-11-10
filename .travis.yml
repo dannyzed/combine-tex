@@ -1,0 +1,9 @@
+deploy:
+  provider: pypi
+  user: dannyzeep
+  password:
+    secure: XmFOUolRYnXC3oChfzlT/MyaBv/L5B5M8Kk3o+oV9F83eH0vTW0eglzKMJ8tYbDs3BJaF9jrYl3pzQZsfnAVbb+SBQZmHcux9xsXCHNqw9zaqi7vLZVLP4nOf7/K/zaYLETAJTEpy2VQ5q6P3M25OXHCOvGnhMCfAsF4F02VBtn462v7p8OCMaNf/Vpligqtxt59KhuhsZEvTdBdTlnMKCUzwi9LiOtVTPzaD/xfBe/byUPfTianw8UOfl6yQKTUfm3qRY1C8c6xsYkTZ+g3HJzIFw5aFYz1FhL2EpSJMm9shZcTltLEHBxZra1GZQp8jOTw04Ax4RMUN0dS0hKCWod+P8Ssjo1aSJA6DlordcShQbVBxGW5xeguAprEWnGQ864CqUQi0rt68lhFcvlf6jf3/Ok4wWU88f+f2vKxU786pY5bNwGsUcmPpyH7UcQ9kg7MV3AnsBItteKKo1rHAxNYsLxthC++Le/cbchS3KiP+XlAIEadGIjxtDsCI+YX6GZWx3/xnkUXiNtYfEEXD8hS9pM5eswO9awNmKiEsvyzXily3moSKRAIjL2xk8yd18hl8oLWnowz6BqUjkvxY45XaB76XOBoHa1ps7pD4LZ7CjsKRGN/6AXKtLwqRDMcXOSeqEIi/6LsC8lS0HLaVnNJUYsJEE2Tl9nd9nO117Y=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: dannyzed/combine-tex
