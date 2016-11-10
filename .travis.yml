@@ -1,18 +1,14 @@
 language: python
-
 python:
-  - "3.5"
-
-script: ""
-
-install: ""	
-
+- '3.5'
+script: ''
+install: ''
 deploy:
   provider: pypi
   user: dannyzeep
-  password:
-    secure: MM628v9aHjuhRDGj17lWSHgMnco13voifBk0GE2X8xJY1aBx2usmamrLAKZ3StaUpSbCOPyIf0VX8G9XjdnqBAUsjujj6Wa/YlY152I4MdPhpW6fkXwipjzfP37BNEMmSZjwdBZesPI/a7S5A4RVREtNk/4p5+1/u0AlqJfS65PWZLHJEKhK3oqJk8iegvsi57nZLWfVs/XBkYk9jEjSluKL4HJZ7F1JXszDRtUwT08K+80V5XU2Znx6zQhEMDmn81Zg+mkARdtOxihayKjQDbVFmm0M2ufTKb/qT+7/XYL8A0j8ut5G7VeqzbH5sAIcYcQoQESOL496kOy6VMG/IU5j0ywGKo2+ydRMGXxQCKHNzPkxKb5RO/WFqiVykzqM/86tjZ5PKQ6FwPyh4CKm3CEAwFEpiOPn0u7xgt70tb646UC4EdrnhNsc8drl5ZbN3M9SKeOjHF6OhXCenqeW6ZZHbuLGCzC+mkLmE2syEvbuF0acI1ZQ3/wxcqUHz/GpsN5maKiWqzZWEHzCSuTuSG+oH/iYIFy88pa+CPGT8j+9vUvOmCS4NzzlWYfG3+sm7mlR//lXgaC51a92SCsDa+sOiEQJ+aSw5YP6Wl42yN4ohdqeg5cUoxRlqGfo2nLKsxbGsWddbkJQVpPP7zy6+wvvdE3lq3zY1lX8sUenay4=
   on:
     tags: true
     distributions: sdist bdist_wheel
     repo: dannyzed/combine-tex
+  password:
+    secure: pC0UTvcKU9kUq6xc+H5sSYymarpLvXVQzu00PcL3pWDCXUTlVmlWr5gJ1+aCzxQ80kQlBpMlGdQ8NF+XANa90XMWTvH/XLLtbohV3E4IN9UjafGE7sARIrmgHC6HESlAWE7A60eZv9ia9I+2vPHproE0DM+F+zRlNDHoKiLG4AQUQ5Djr01CIgbEVi6xYrC+MkkZZNvTf8eUILq9XiqLGXpKgf8YBIhNtfQZknYUkBi5mt/pwHw+/CuMaNE1ovLsYxp0CFwNBR24XEwK1Mp4Exvws1sRPJk5bY7nWbdGb7/kgMyKq3s8fr3Qkdkd5FxGqnOKsxZNumDCDw5ywxjHENpCRxZ9DH84t6JJ1tp0u/5x2WAEyAiWVMPVXIZAODBv40oEfBnVlpwU8y3dTxUOXDXrUdMtGrwzI1Xurwl7L5W2WYKQ3/AZFUxQWqdnMsfRnEk1kv01UdSSfqeq7qeFgyq+obaqbJBFn/wb02UlWhSBgDvif7PfN7maCXZYih3cit1RgeE7jA/nTLcbxlvnB6HxWGxTNnR/z290JVuosFJkTd4xd0B9rpz/c0Go501Fm8pV0ozbIgtcRz1mDDJEZyi/EvOXEP5TkKJBV1DxTpoKISgLKMfd6JQEgARSfyYvaIXZ8qOR0o7uGQgv9iNkifmG8jX7F3I6mPHLOZS6U/E=
